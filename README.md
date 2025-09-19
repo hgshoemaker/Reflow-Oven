@@ -61,6 +61,8 @@ This project uses PlatformIO and includes the following libraries:
 
 **Original Project**: This project is based on the excellent work by **Zach Hipps** and **DigiKey**. 
 
+**Original Repository**: [https://github.com/bytesizedengineering/Solder-Reflow-Oven](https://github.com/bytesizedengineering/Solder-Reflow-Oven)
+
 **Migration Note**: This version has been migrated from the original Arduino IDE project to **PlatformIO** for improved dependency management and development workflow.
 
 ## License
