@@ -1,0 +1,87 @@
+```mermaid
+flowchart TD
+    A([Start Program]) --> B[Initialize Hardware]
+    B --> C[Setup Display & Thermocouple]
+    C --> D[Configure SSR Pin]
+    D --> E[Enter Main Loop]
+    
+    E --> F[Display Setup Menu]
+    F --> G{Touch Input?}
+    G -->|No| G
+    G -->|Yes| H{Touch Location?}
+    
+    H -->|Parameter Area| I[Edit Menu]
+    H -->|Start Button| Q[Display Reflow Menu]
+    
+    I --> J{Parameter Type?}
+    J -->|Preheat| K[Edit Preheat Settings]
+    J -->|Soak| L[Edit Soak Settings]
+    J -->|Reflow| M[Edit Reflow Settings]
+    
+    K --> N{Edit Action?}
+    L --> N
+    M --> N
+    N -->|Temp Up/Down| O[Adjust Temperature]
+    N -->|Time Up/Down| P[Adjust Time]
+    N -->|Save| F
+    
+    O --> N
+    P --> N
+    
+    Q --> R[Show Start Button]
+    R --> S{Start Pressed?}
+    S -->|No| S
+    S -->|Yes| T[Begin Reflow Process]
+    
+    T --> U[Initialize Timer]
+    U --> V[Start PID Control]
+    V --> W[Read Temperature]
+    W --> X{Time Check?}
+    
+    X -->|No| AA{Stop Pressed?}
+    X -->|Yes| Y[Update Display]
+    Y --> Z{Reflow Stage?}
+    
+    Z -->|0-Preheat Time| BB[Preheat Stage]
+    Z -->|Preheat-Soak Time| CC[Soak Stage]
+    Z -->|Soak-Reflow Time| DD[Reflow Stage]
+    Z -->|Reflow-Total Time| EE[Cooldown Stage]
+    Z -->|Complete| FF[Process Complete]
+    
+    BB --> GG[Set Preheat Temp]
+    CC --> HH[Set Soak Temp]
+    DD --> II[Set Reflow Temp]
+    EE --> JJ[Set Cooldown Temp]
+    
+    GG --> KK[PID Control]
+    HH --> KK
+    II --> KK
+    JJ --> KK
+    
+    KK --> LL{PID Output?}
+    LL -->|High| MM[Turn SSR ON]
+    LL -->|Low| NN[Turn SSR OFF]
+    
+    MM --> OO[Plot Temperature]
+    NN --> OO
+    OO --> AA
+    
+    AA -->|No| W
+    AA -->|Yes| FF
+    
+    FF --> PP[Show Done Button]
+    PP --> QQ{Done Pressed?}
+    QQ -->|No| QQ
+    QQ -->|Yes| E
+    
+    %% Styling
+    classDef startEnd fill:#90EE90,stroke:#333,stroke-width:2px
+    classDef process fill:#87CEEB,stroke:#333,stroke-width:2px
+    classDef decision fill:#FFB6C1,stroke:#333,stroke-width:2px
+    classDef control fill:#DDA0DD,stroke:#333,stroke-width:2px
+    
+    class A,E,FF startEnd
+    class B,C,D,F,I,K,L,M,O,P,Q,R,T,U,V,W,Y,BB,CC,DD,EE,GG,HH,II,JJ,KK,OO,PP process
+    class G,H,J,N,S,X,Z,LL,AA,QQ decision
+    class MM,NN control
+```
